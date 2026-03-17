@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>FactuFácil</title>
+
+  <!-- Font Inter -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <!-- Feather Icons -->
+  <script src="https://unpkg.com/feather-icons"></script>
+
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background-color: #F7F9FC;
+      color: #1F2937;
+    }
+
+    /* ===========================
+       TOPBAR
+    ============================ */
+    .topbar {
+      height: 64px;
+      background: #FFFFFF;
+      border-bottom: 1px solid #E6EAF0;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 24px;
+      position: sticky;
+      top: 0;
+      z-index: 10;
+    }
+
+    .topbar-left { display: flex; align-items: center; gap: 24px; }
+    .logo { font-size: 18px; font-weight: 700; }
+
+    .topnav { display: flex; gap: 20px; }
+    .topnav a {
+      font-size: 14px;
+      padding: 6px 10px;
+      border-radius: 8px;
+      color: #6B7280;
+    }
+    .topnav a:hover,
+    .topnav a.active {
+      background: #E6EAF0;
+      color: #1F2937;
+    }
+
+    .topbar-right { display: flex; align-items: center; gap: 20px; }
+    .icon-btn { width: 20px; height: 20px; color: #6B7280; cursor: pointer; }
+    .avatar { width: 32px; height: 32px; border-radius: 50%; background: #E6EAF0; }
+
+    /* ===========================
+       CONTAINER
+    ============================ */
+    .container {
+      padding: 32px;
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+    }
+
+    /* ===========================
+       DASHBOARD GRID (nou)
+    ============================ */
+    .metrics-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 20px;
+    }
+
+    @media (max-width: 1024px) {
+      .metrics-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (max-width: 640px) {
+      .metrics-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    /* ===========================
+       CARD METRIC (nou design)
+    ============================ */
+    .metric-card {
+      background: #FFFFFF;
+      border: 1px solid #E6EAF0;
+      border-radius: 12px;
+      padding: 16px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+
+      display: grid;
+      grid-template-columns: 32px auto;
+      column-gap: 12px;
+      align-items: center;
+
+      height: 100px; /* compact */
+    }
+
+    .metric-icon-box {
+      width: 28px;
+      height: 28px;
+      border-radius: 6px;
+      background: #EEF2FF;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .metric-icon-box i {
+      width: 16px;
+      height: 16px;
+      color: #6366F1;
+    }
+
+    .metric-title {
+      font-size: 14px;
+      font-weight: 500;
+      color: #6B7280;
+      margin-bottom: 4px;
+    }
+
+    .metric-value {
+      font-size: 24px;
+      font-weight: 600;
+      color: #111827;
+      margin-bottom: 2px;
+    }
+
+    .metric-sub {
+      font-size: 12px;
+      color: #9CA3AF;
+    }
+
+    /* ===========================
+       CARD GENERAL
+    ============================ */
+    .card {
+      background: #FFFFFF;
+      border: 1px solid #E6EAF0;
+      border-radius: 12px;
+      padding: 24px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+    }
+
+    .section-title {
+      font-size: 16px;
+      font-weight: 600;
+      margin-bottom: 16px;
+    }
+
+    /* ===========================
+       TABLE
+    ============================ */
+    table { width: 100%; border-collapse: collapse; font-size: 14px; }
+    thead { background: #F9FAFB; }
+
+    th, td {
+      padding: 12px 10px;
+      height: 48px;
+      border-bottom: 1px solid #E6EAF0;
+      text-align: left;
+    }
+
+    th { font-weight: 600; color: #1F2937; }
+    tbody tr:hover { background: #F9FAFB; }
+
+    /* BADGES */
+    .badge {
+      padding: 4px 10px;
+      border-radius: 8px;
+      font-size: 12px;
+      font-weight: 500;
+      display: inline-block;
+    }
+
+    .badge-platit { background: #E8F7F1; color: #2F7D65; }
+    .badge-asteptare { background: #FFF4E5; color: #B26A00; }
+    .badge-restant { background: #F2F4F7; color: #667085; }
+
+  </style>
+</head>
+
+<body>
+
+  <!-- TOPBAR -->
+  <header class="topbar">
+    <div class="topbar-left">
+      <div class="logo">FactuFácil</div>
+
+      <nav class="topnav">
+        <a href="#" class="active">Panel</a>
+        <a href="#">Facturas</a>
+        <a href="#">Clientes</a>
+        <a href="#">Gastos</a>
+      </nav>
+    </div>
+
+    <div class="topbar-right">
+      <i data-feather="search" class="icon-btn"></i>
+      <i data-feather="bell" class="icon-btn"></i>
+      <div class="avatar"></div>
+    </div>
+  </header>
+
+  <!-- CONȚINUT -->
+  <div class="container">
+
+    <!-- METRICI (nou design compact) -->
+    <div class="metrics-grid">
+
+      <div class="metric-card">
+        <div class="metric-icon-box">
+          <i data-feather="bar-chart-2"></i>
+        </div>
+        <div>
+          <div class="metric-title">Ingresos mensuales</div>
+          <div class="metric-value">8.750 €</div>
+          <div class="metric-sub">El mes pasado: 7.200 €</div>
+        </div>
+      </div>
+
+      <div class="metric-card">
+        <div class="metric-icon-box">
+          <i data-feather="file-text"></i>
+        </div>
+        <div>
+          <div class="metric-title">Facturas emitidas</div>
+          <div class="metric-value">42</div>
+          <div class="metric-sub">+12 respecto al mes pasado</div>
+        </div>
+      </div>
+
+      <div class="metric-card">
+        <div class="metric-icon-box">
+          <i data-feather="clock"></i>
+        </div>
+        <div>
+          <div class="metric-title">Facturas pendientes</div>
+          <div class="metric-value">6</div>
+          <div class="metric-sub">Total: 2.150 €</div>
+        </div>
+      </div>
+
+      <div class="metric-card">
+        <div class="metric-icon-box">
+          <i data-feather="trending-down"></i>
+        </div>
+        <div>
+          <div class="metric-title">Gastos mensuales</div>
+          <div class="metric-value">3.420 €</div>
+          <div class="metric-sub">El mes pasado: 3.100 €</div>
+        </div>
+      </div>
+DataStar
+    </div>
+
+    <!-- TABEL FACTURI -->
+    <div class="card">
+      <div class="section-title">Facturas recientes</div>
+
+      <table>
+        <thead>
+          <tr>
+            <th>Cliente</th>
+            <th>Fecha</th>
+            <th>Estado de pago</th>
+            <th>Total</th>
+          </tr>
+        </thead>
+
+        <tbody>
+          <tr>
+            <td>Studio Creativ</td>
+            <td>12/03/2026</td>
+            <td><span class="badge badge-platit">Pagado</span></td>
+            <td>850 €</td>
+          </tr>
+
+          <tr>
+            <td>Alfa Consulting</td>
+            <td>10/03/2026</td>
+            <td><span class="badge badge-asteptare">En espera</span></td>
+            <td>1.200 €</td>
+          </tr>
+
+          <tr>
+            <td>Beta Media</td>
+            <td>01/03/2026</td>
+            <td><span class="badge badge-restant">Restaurar</span></td>
+            <td>430 €</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+  </div>
+
+  <script>
+    feather.replace();
+  </script>
+
+</body>
+</html>
