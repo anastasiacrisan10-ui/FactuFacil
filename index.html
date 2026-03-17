@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>FactuFácil</title>
+
+  <!-- Font Inter -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+
+  <!-- Pictograme (Heroicons) -->
+  <script src="https://unpkg.com/feather-icons"></script>
+
+  <style>
+    /* ===========================
+       RESET & BASE
+    ============================ */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background-color: #F7F9FC;
+      color: #1F2937;
+    }
+
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    /* ===========================
+       BARA SUPERIOARĂ (64px)
+    ============================ */
+    .topbar {
+      height: 64px;
+      background: #FFFFFF;
+      border-bottom: 1px solid #E6EAF0;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 24px;
+      position: sticky;
+      top: 0;
+      z-index: 10;
+    }
+
+    .topbar-left {
+      display: flex;
+      align-items: center;
+      gap: 24px;
+    }
+
+    .logo {
+      font-size: 18px;
+      font-weight: 700;
+    }
+
+    .topnav {
+      display: flex;
+      gap: 20px;
+    }
+
+    .topnav a {
+      font-size: 14px;
+      padding: 6px 10px;
+      border-radius: 8px;
+      color: #6B7280;
+    }
+
+    .topnav a:hover,
+    .topnav a.active {
+      background: #E6EAF0;
+      color: #1F2937;
+    }
+
+    .topbar-right {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+    }
+
+    .icon-btn {
+      width: 20px;
+      height: 20px;
+      color: #6B7280;
+      cursor: pointer;
+    }
+
+    .avatar {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      background: #E6EAF0;
+    }
+
+    /* ===========================
+       LAYOUT PRINCIPAL
+    ============================ */
+    .container {
+      padding: 32px;
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+    }
+
+    /* ===========================
+       CARDURI GENERALE
+    ============================ */
+    .card {
+      background: #FFFFFF;
+      border: 1px solid #E6EAF0;
+      border-radius: 12px;
+      padding: 24px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+    }
+
+    .section-title {
+      font-size: 16px;
+      font-weight: 600;
+      margin-bottom: 16px;
+    }
+
+    /* ===========================
+       FIȘE METRICE
+    ============================ */
+    .metrics-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 20px;
+    }
+
+    .metric-card {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .metric-icon {
+      width: 20px;
+      height: 20px;
+      color: #6B7280;
+    }
+
+    .metric-title {
+      font-size: 14px;
+      color: #6B7280;
+    }
+
+    .metric-value {
+      font-size: 28px;
+      font-weight: 700;
+    }
+
+    .metric-sub {
+      font-size: 13px;
+      color: #6B7280;
+    }
+
+    /* ===========================
+       TABEL FACTURI
+    ============================ */
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 14px;
+    }
+
+    thead {
+      background: #F9FAFB;
+    }
+
+    th, td {
+      padding: 12px 10px;
+      height: 48px;
+      border-bottom: 1px solid #E6EAF0;
+      text-align: left;
+    }
+
+    th {
+      font-weight: 600;
+      color: #1F2937;
+    }
+
+    tbody tr:hover {
+      background: #F9FAFB;
+    }
+
+    /* ===========================
+       INSIGNE DE STARE
+    ============================ */
+    .badge {
+      padding: 4px 10px;
+      border-radius: 8px;
+      font-size: 12px;
+      font-weight: 500;
+      display: inline-block;
+    }
+
+    .badge-platit {
+      background: #E8F7F1;
+      color: #2F7D65;
+    }
+
+    .badge-asteptare {
+      background: #FFF4E5;
+      color: #B26A00;
+    }
+
+    .badge-restant {
+      background: #F2F4F7;
+      color: #667085;
+    }
+
+    /* ===========================
+       BUTON PRINCIPAL
+    ============================ */
+    .btn-primary {
+      background: #6FA8FF;
+      color: #FFFFFF;
+      padding: 10px 16px;
+      border-radius: 8px;
+      border: none;
+      cursor: pointer;
+      font-size: 14px;
+    }
+
+    .btn-primary:hover {
+      background: #5A93E6;
+    }
+
+  </style>
+</head>
+<body>
+
+  <!-- ===========================
+       BARA SUPERIOARĂ
+  ============================ -->
+  <header class="topbar">
+    <div class="topbar-left">
+      <div class="logo">FactuFácil</div>
+
+      <nav class="topnav">
+        <a href="#" class="active">Tablou de bord</a>
+        <a href="#">Facturi</a>
+        <a href="#">Clienți</a>
+        <a href="#">Cheltuieli</a>
+      </nav>
+    </div>
+
+    <div class="topbar-right">
+      <i data-feather="search" class="icon-btn"></i>
+      <i data-feather="bell" class="icon-btn"></i>
+      <div class="avatar"></div>
+    </div>
+  </header>
+
+  <!-- ===========================
+       CONȚINUT PRINCIPAL
+  ============================ -->
+  <div class="container">
+
+    <!-- FIȘE METRICE -->
+    <div class="metrics-grid">
+
+      <div class="card metric-card">
+        <i data-feather="bar-chart-2" class="metric-icon"></i>
+        <div class="metric-title">Venit lunar</div>
+        <div class="metric-value">8.750 €</div>
+        <div class="metric-sub">Luna trecută: 7.200 €</div>
+      </div>
+
+      <div class="card metric-card">
+        <i data-feather="file-text" class="metric-icon"></i>
+        <div class="metric-title">Facturi emise</div>
+        <div class="metric-value">42</div>
+        <div class="metric-sub">+12 față de luna trecută</div>
+      </div>
+
+      <div class="card metric-card">
+        <i data-feather="clock" class="metric-icon"></i>
+        <div class="metric-title">Facturi restante</div>
+        <div class="metric-value">6</div>
+        <div class="metric-sub">Total: 2.150 €</div>
+      </div>
+
+      <div class="card metric-card">
+        <i data-feather="trending-down" class="metric-icon"></i>
+        <div class="metric-title">Cheltuieli lunare</div>
+        <div class="metric-value">3.420 €</div>
+        <div class="metric-sub">Luna trecută: 3.100 €</div>
+      </div>
+
+    </div>
+
+    <!-- TABEL FACTURI RECENTE -->
+    <div class="card">
+      <div class="section-title">Facturi recente</div>
+
+      <table>
+        <thead>
+          <tr>
+            <th>Client</th>
+            <th>Data</th>
+            <th>Stare</th>
+            <th>Total</th>
+          </tr>
+        </thead>
+
+        <tbody>
+          <tr>
+            <td>Studio Creativ</td>
+            <td>12/03/2026</td>
+            <td><span class="badge badge-platit">Plătit</span></td>
+            <td>850 €</td>
+          </tr>
+
+          <tr>
+            <td>Alfa Consulting</td>
+            <td>10/03/2026</td>
+            <td><span class="badge badge-asteptare">În așteptare</span></td>
+            <td>1.200 €</td>
+          </tr>
+
+          <tr>
+            <td>Beta Media</td>
+            <td>01/03/2026</td>
+            <td><span class="badge badge-restant">Restanțat</span></td>
+            <td>430 €</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+  </div>
+
+  <script>
+    feather.replace();
+  </script>
+
+</body>
+</html>
